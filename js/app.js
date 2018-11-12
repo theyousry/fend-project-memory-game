@@ -27,35 +27,47 @@ function shuffle(array) {
 
 //Are the icons matched?
 function match(){
-    if($('.open').length % 2 === 0){
-        var icon = null;
-        $('.open i').each(function( index, value ) {
-            if(icon === value.className){
+    if($('.open').length % 2 === 0 && $('.open').length > 0){
+      let icons = $('.open i')
+      setTimeout(function(){
+        if(icons[0].className === icons[1].className){
                 $('.open').addClass('match')
-                $('.open').removeClass('open show')
-                moves()
-            }else if (icon != null){
-                $('.open').removeClass('open show')
-                moves()
-            }
-            icon = value.className
-          });
+              }
+              $('.open').removeClass('open show')
+            }, 1000);
+            moves()
+          }
         }
-      }
 //Count Moves
 function moves(){
     let value = parseInt($('.moves').text()) + 1;
     $(".moves").text(value);
+    console.log("yes")
 }
 
-$('.deck').on('click', (function(event){
-    if (event.target.className.includes('card')){
-        if (!event.target.className.includes('match')){
-            $(event.target).toggleClass('open show')
-        }
+//Count Stars according Moves
+function stars(){
+    if(parseInt($('.moves').text()) > 10 && parseInt($('.moves').text()) < 15){
+        //search later for a better approach of these
+        $('.fa-star:eq(2)').addClass('fa-star-o')
+        $('.fa-star:eq(2)').removeClass('fa-star')
+    }else if(parseInt($('.moves').text()) >= 15){
+        $('.fa-star:eq(1)').addClass('fa-star-o')
+        $('.fa-star:eq(1)').removeClass('fa-star')
+    }
+}
+
+var test = $('.deck').on('click', (function(event){
+    if($('.open').length < 2){
+        if (event.target.className.includes('card')){
+            if (!event.target.className.includes('match')){
+                $(event.target).toggleClass('open show')
+            }
         match();
+        stars();
       }
-    }));
+    }
+  }));
 //rest to defaults
 $('.restart').click(function(event){
     $(".moves").text(0);
