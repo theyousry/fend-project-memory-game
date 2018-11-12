@@ -25,6 +25,32 @@ function shuffle(array) {
     return array;
 }
 
+function match (){
+    console.log($('.open').length)
+    if($('.open').length % 2 === 0){
+        console.log($('.open'))
+        console.log('multiple of 2')
+        $('.open').each(function( index, value ) {
+            console.log(value)
+            $('.open').addClass('vibe')
+          });
+        }
+      }
+//Count Moves
+$('.card').not('.match').click(function(event){
+    $(event.target).toggleClass('open show')
+    console.log(event)
+    match();
+    let value = parseInt($('.moves').text()) + 1;
+    $(".moves").text(value);
+});
+
+$('.open show').on('click',(function(event){
+    console.log(event)
+    $(event.target).removeClass('open show')
+    let value = parseInt($('.moves').text()) + 1;
+    $(".moves").text(value);
+}));
 
 /*
  * set up the event listener for a card. If a card is clicked:
