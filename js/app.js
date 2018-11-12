@@ -25,33 +25,47 @@ function shuffle(array) {
     return array;
 }
 
-function match (){
-    console.log($('.open').length)
+//Are the icons matched?
+function match(){
     if($('.open').length % 2 === 0){
-        console.log($('.open'))
-        console.log('multiple of 2')
-        $('.open').each(function( index, value ) {
-            console.log(value)
-            $('.open').addClass('vibe')
+        var icon = null;
+        $('.open i').each(function( index, value ) {
+            if(icon === value.className){
+                $('.open').addClass('match')
+                $('.open').removeClass('open show')
+                moves()
+            }else if (icon != null){
+                $('.open').removeClass('open show')
+                moves()
+            }
+            icon = value.className
           });
         }
       }
 //Count Moves
-$('.card').not('.match').click(function(event){
-    $(event.target).toggleClass('open show')
-    console.log(event)
-    match();
+function moves(){
     let value = parseInt($('.moves').text()) + 1;
     $(".moves").text(value);
+}
+
+$('.deck').on('click', (function(event){
+    if (event.target.className.includes('card')){
+        if (!event.target.className.includes('match')){
+            $(event.target).toggleClass('open show')
+        }
+        match();
+      }
+    }));
+//rest to defaults
+$('.restart').click(function(event){
+    $(".moves").text(0);
+    $('.card').removeClass('open show match');
+    $('.deck').html(shuffle($('.card')));
 });
 
-$('.open show').on('click',(function(event){
-    console.log(event)
-    $(event.target).removeClass('open show')
-    let value = parseInt($('.moves').text()) + 1;
-    $(".moves").text(value);
-}));
-
+$(document).ready(function(event){
+    $('.deck').html(shuffle($('.card')));
+});
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
