@@ -216,3 +216,7 @@ cards match effect
       transform: none
     }
   }
+
+  .timer{
+    margin-left: 10%
+  }

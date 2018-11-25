@@ -9,6 +9,9 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+ const oneMin = 59;
+ var mins;
+ var secs;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -62,7 +65,7 @@ function stars(){
 }
 
 $('.deck').on('click', (function(event){
-    if($('.open').length < 2){
+    if($('.open').length < 2 && !$(event.target).hasClass('open')){
         if (event.target.className.includes('card')){
             if (!event.target.className.includes('match')){
                 $(event.target).toggleClass('open show')
@@ -75,13 +78,37 @@ $('.deck').on('click', (function(event){
 //rest to defaults
 $('.restart').click(function(event){
     $(".moves").text(0);
-    $('.card').removeClass('open show match');
+    $('.card').removeClass('open show match matchEFF');
+    $('.fa-star-o').addClass('fa-star');
+    $('.fa-star').removeClass('fa-star-o');
     $('.deck').html(shuffle($('.card')));
 });
 
 $(document).ready(function(event){
     $('.deck').html(shuffle($('.card')));
 });
+
+function userTimer() {
+    let timerId = setInterval(function() {
+        moreSecond();
+    }, 1000);
+  }
+
+function moreSecond(){
+    let timer = $('.timer').text().split(":");
+    mins = parseInt(timer[0]);
+    secs = parseInt(timer[1]);
+    if (secs === oneMin){
+        $(".timer").text(`${timerFormat(++mins)}:00`);
+    }else{
+        $(".timer").text(`${timerFormat(mins)}:${timerFormat(++secs)}`);
+    }
+}
+ function timerFormat(value){
+    return ('0' + (value)).slice(-2)
+}
+
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
