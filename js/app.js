@@ -28,11 +28,15 @@ function shuffle(array) {
 //Are the icons matched?
 function match(){
     if($('.open').length % 2 === 0 && $('.open').length > 0){
-      let icons = $('.open i')
-      setTimeout(function(){
+      let icons = $('.open i');
         if(icons[0].className === icons[1].className){
-                $('.open').addClass('match')
-              }
+            $('.open').addClass('match')
+            $('.open').addClass('matchEFF')
+          }else{
+            $('.open').addClass('unmatchEFF')
+        }
+      setTimeout(function(){
+              $('.card').removeClass('unmatchEFF')
               $('.open').removeClass('open show')
             }, 1000);
             moves()
@@ -57,7 +61,7 @@ function stars(){
     }
 }
 
-var test = $('.deck').on('click', (function(event){
+$('.deck').on('click', (function(event){
     if($('.open').length < 2){
         if (event.target.className.includes('card')){
             if (!event.target.className.includes('match')){
