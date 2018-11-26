@@ -43,21 +43,20 @@ function match(){
               $('.card').removeClass('unmatchEFF')
               $('.open').removeClass('open show')
             }, 1000);
-            moves()
+            movesNum();
           }
       if($('.match').length === cards){
             winPopup();
           }
         }
 //Count Moves
-function moves(){
+function movesNum(){
     let value = parseInt($('.moves').text()) + 1;
     $(".moves").text(value);
-    console.log("yes")
 }
 
 //Count Stars according Moves
-function stars(){
+function rating(){
     if(twoStars()){
         $('.fa-star:eq(2)').addClass('fa-star-o')
         $('.fa-star:eq(2)').removeClass('fa-star')
@@ -74,7 +73,7 @@ $('.deck').on('click', (function(event){
                 $(event.target).toggleClass('open show')
             }
         match();
-        stars();
+        rating();
       }
     }
   }));
@@ -87,10 +86,12 @@ $('.restart, .btn-info').click(function(event){
     $('.circle-loader').removeClass('load-complete');
     $('.checkmark').toggle();
     $('.deck').html(shuffle($('.card')));
+    $(".timer").text(`00:00`);
 });
 
 $(document).ready(function(event){
     $('.deck').html(shuffle($('.card')));
+    userTimer();
 });
 
 // Timer
@@ -118,11 +119,11 @@ function moreSecond(){
 function winPopup(){
     let stars = $(".fa-star").length === 1? "Star" : "Stars"
     $('.modal').modal('show');
-    $('.winner-details').html(`With ${$(".moves").text()} Moves and ${$(".fa-star").length} ${stars}.<br/> Woooooo!`)
+    $('.winner-details').html(`With ${$(".moves").text()} Moves and ${$(".fa-star").length} ${stars}.<br/> Time: ${timerFormat(mins)}:${timerFormat(secs)} Woooooo!`)
     setTimeout(function(){
         $('.circle-loader').addClass('load-complete');
         $('.checkmark').toggle();
-    }, 500);
+    }, 1000);
 }
 
 function twoCards(){
