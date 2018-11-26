@@ -29,6 +29,7 @@ body {
 }
 
 h1 {
+    margin-top: 1em;
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
 }
@@ -183,7 +184,7 @@ cards match effect
     0% {
       -webkit-transform: none;
       -ms-transform: none;
-      transform: none
+      transform: none;
     }
     15% {
       -webkit-transform: translate3d(-25%, 0, 0) rotate3d(0, 0, 1, -5deg);
@@ -213,10 +214,100 @@ cards match effect
     100% {
       -webkit-transform: none;
       -ms-transform: none;
-      transform: none
+      transform: none;
     }
   }
 
   .timer{
-    margin-left: 10%
+    margin-left: 10%;
+  }
+
+  .modal-title{
+    font-weight: bold;
+    font-size: 30px;
+  }
+   .modal-content{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+   .modal-full {
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  /* CSS Animation: Circle loader with checkmark completed state
+  A PEN BY Scott Galloway lINK:https://codepen.io/scottloway/pen/zqoLyQ */
+  .circle-loader {
+    margin-top: 12%;
+    margin-bottom: 3em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-left-color: #5cb85c;
+    animation: loader-spin 1.2s infinite linear;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 50%;
+    width: 7em;
+    height: 7em;
+  }
+  .load-complete {
+    -webkit-animation: none;
+    animation: none;
+    border-color: #5cb85c;
+    transition: border 500ms ease-out;
+  }
+  .checkmark {
+    display: none;
+  }
+  .checkmark.draw:after {
+    animation-duration: 800ms;
+    animation-timing-function: ease;
+    animation-name: checkmark;
+    transform: scaleX(-1) rotate(135deg);
+  }
+  .checkmark:after {
+    opacity: 1;
+    height: 3.5em;
+    width: 1.75em;
+    transform-origin: left top;
+    border-right: 3px solid #5cb85c;
+    border-top: 3px solid #5cb85c;
+    content: '';
+    left: 1.75em;
+    top: 3.5em;
+    position: absolute;
+  }
+  @keyframes loader-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes checkmark {
+    0% {
+      height: 0;
+      width: 0;
+      opacity: 1;
+    }
+    20% {
+      height: 0;
+      width: 1.75em;
+      opacity: 1;
+    }
+    40% {
+      height: 3.5em;
+      width: 1.75em;
+      opacity: 1;
+    }
+    100% {
+      height: 3.5em;
+      width: 1.75em;
+      opacity: 1;
+    }
   }

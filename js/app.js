@@ -9,6 +9,7 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+ const cards = 16;
  const oneMin = 59;
  var mins;
  var secs;
@@ -30,7 +31,7 @@ function shuffle(array) {
 
 //Are the icons matched?
 function match(){
-    if($('.open').length % 2 === 0 && $('.open').length > 0){
+    if(twoCards()){
       let icons = $('.open i');
         if(icons[0].className === icons[1].className){
             $('.open').addClass('match')
@@ -44,6 +45,9 @@ function match(){
             }, 1000);
             moves()
           }
+      if($('.match').length === cards){
+            winPopup();
+          }
         }
 //Count Moves
 function moves(){
@@ -54,11 +58,10 @@ function moves(){
 
 //Count Stars according Moves
 function stars(){
-    if(parseInt($('.moves').text()) > 10 && parseInt($('.moves').text()) < 15){
-        //search later for a better approach of these
+    if(twoStars()){
         $('.fa-star:eq(2)').addClass('fa-star-o')
         $('.fa-star:eq(2)').removeClass('fa-star')
-    }else if(parseInt($('.moves').text()) >= 15){
+    }else if(oneStar()){
         $('.fa-star:eq(1)').addClass('fa-star-o')
         $('.fa-star:eq(1)').removeClass('fa-star')
     }
@@ -76,11 +79,13 @@ $('.deck').on('click', (function(event){
     }
   }));
 //rest to defaults
-$('.restart').click(function(event){
+$('.restart, .btn-info').click(function(event){
     $(".moves").text(0);
     $('.card').removeClass('open show match matchEFF');
     $('.fa-star-o').addClass('fa-star');
     $('.fa-star').removeClass('fa-star-o');
+    $('.circle-loader').removeClass('load-complete');
+    $('.checkmark').toggle();
     $('.deck').html(shuffle($('.card')));
 });
 
@@ -88,6 +93,7 @@ $(document).ready(function(event){
     $('.deck').html(shuffle($('.card')));
 });
 
+// Timer
 function userTimer() {
     let timerId = setInterval(function() {
         moreSecond();
@@ -108,6 +114,28 @@ function moreSecond(){
     return ('0' + (value)).slice(-2)
 }
 
+// Congratulations Popup
+function winPopup(){
+    let stars = $(".fa-star").length === 1? "Star" : "Stars"
+    $('.modal').modal('show');
+    $('.winner-details').html(`With ${$(".moves").text()} Moves and ${$(".fa-star").length} ${stars}.<br/> Woooooo!`)
+    setTimeout(function(){
+        $('.circle-loader').addClass('load-complete');
+        $('.checkmark').toggle();
+    }, 500);
+}
+
+function twoCards(){
+    return ($('.open').length % 2 === 0 && $('.open').length > 0);
+}
+
+function twoStars(){
+    return (parseInt($('.moves').text()) > 10 && parseInt($('.moves').text()) < 15);
+}
+
+function oneStar(){
+    return (parseInt($('.moves').text()) >= 15);
+}
 
 /*
  * set up the event listener for a card. If a card is clicked:
