@@ -17,7 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background: #ffffff url('../../img/geometry2.png'); /* Background pattern from Subtle Patterns */
     font-family: 'Coda', cursive;
 }
 
@@ -93,7 +93,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
+    width: 300px;
     margin-bottom: 10px;
 }
 
@@ -238,7 +238,7 @@ cards match effect
     display: flex;
     flex-wrap: wrap;
   }
-  
+
   /* CSS Animation: Circle loader with checkmark completed state
   A PEN BY Scott Galloway lINK:https://codepen.io/scottloway/pen/zqoLyQ */
   .circle-loader {

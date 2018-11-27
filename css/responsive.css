@@ -1,0 +1,38 @@
+@media only screen and (max-width: 600px ){
+  .table{
+    width: 528px;
+    min-height: 544px;
+    padding: 26px;
+  }
+
+  .table .card{
+    height: 100px;
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 500px ){
+  .table{
+    width: 422px;
+    min-height: 435px;
+    padding: 21px;
+  }
+
+  .table .card{
+    height: 80px;
+    width: 80px;
+  }
+}
+
+@media only screen and (max-width: 400px ){
+  .table{
+    width: 304px;
+    min-height: 313px;
+    padding: 18px;
+  }
+
+  .table .card{
+    height: 58px;
+    width: 58px;
+  }
+}
